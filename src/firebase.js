@@ -1,7 +1,6 @@
-// Import the functions you need from the SDKs you need
+// Import required Firebase modules
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-//import dotenv from "dotenv";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -22,11 +21,8 @@ import {
 } from "firebase/firestore";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions"; // Import Functions modules
 import { getStorage, connectStorageEmulator } from "firebase/storage"; // Import Storage modules
-// Load environment variables from .env file
-//dotenv.config();
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase configuration object
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -36,7 +32,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -51,7 +46,7 @@ const functions = getFunctions(app); // Initialize Functions
 // Connect to emulators if running locally
 if (process.env.NODE_ENV === 'development') {
   connectAuthEmulator(auth, 'http://localhost:9099');
-  connectFirestoreEmulator(db, 'localhost', 8080); // Firestore emulator
+  connectFirestoreEmulator(db, 'localhost', 8090); // Firestore emulator
   connectFunctionsEmulator(functions, 'localhost', 5001); // Functions emulator
   connectStorageEmulator(storage, 'localhost', 9199);
 }
